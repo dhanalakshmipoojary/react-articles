@@ -1,0 +1,39 @@
+
+.readMore::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 0;
+  cursor: pointer;
+  content: "";
+}
+
+
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #28666e;
+  border: none;
+    background: none;
+}
+
+.readMore:focus {
+  outline: 1px dotted #28666e;
+}
+
+.readMore .icon {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  transform: translateX(var(--link-icon-translate));
+  opacity: var(--link-icon-opacity);
+  transition: all 0.3s;
+}
+
+
+
+
+
+
+
