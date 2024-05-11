@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ApiServices from "../../_services/ApiService";
-import { Card, Header } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArticleDetails } from "../../store/action";
+import { RootState, AppDispatch } from "../../store/store";
+import { Card, Header, Text, Loader } from "../../components";
 import style from "./ArticlesDetails.module.scss";
 
 interface IArticleList {
@@ -12,34 +14,33 @@ interface IArticleList {
 }
 
 function ArticlesDetails() {
-  const [articlesList, setArticlesList] = useState<IArticleList>({
-    id: "",
-    title: "",
-    summary: "",
-    fullText: "",
-  });
-  const [notifications, setNotifications] = useState(null);
   const navigate = useNavigate();
-  const { articleId } = useParams();
+  const { articleId = "" } = useParams();
+
+  const dispatch = useDispatch<AppDispatch>();
+  const articleDetails = useSelector(
+    (state: RootState) => state.articles.selectedArticle
+  );
+  const error = useSelector((state: RootState) => state.articles.error);
 
   useEffect(() => {
-    ApiServices.get(`/assignment/articles/${articleId}`)
-      .then((data) => {
-        console.log("articlesList", data);
-        setArticlesList(data);
-      })
-      .catch((error) => setNotifications(error.message));
+    if (articleId) {
+      dispatch(fetchArticleDetails(articleId));
+    }
   }, []);
 
-  const renderError = notifications ? (
-    <div className={notifications}>{notifications}</div>
+  const renderError = error ? (
+    <div className={style.error}>
+      <Loader />
+      <Text id="DATA_FETCH_ERROR" />
+    </div>
   ) : null;
 
-  const renderArticles = articlesList ? (
+  const renderArticles = articleDetails ? (
     <div>
-      <h1>{articlesList.title}</h1>
-      <p>{articlesList.summary}</p>
-      <p>{articlesList.fullText}</p>
+      <h1>{articleDetails.title}</h1>
+      <p>{articleDetails.summary}</p>
+      <p>{articleDetails.fullText}</p>
     </div>
   ) : null;
 
@@ -47,7 +48,7 @@ function ArticlesDetails() {
     <div>
       <Header title="News Details" />
       <div className={style.articlesDetails}>
-        {notifications ? renderError : renderArticles}
+        {error ? renderError : renderArticles}
       </div>
     </div>
   );

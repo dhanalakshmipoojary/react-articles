@@ -14,6 +14,7 @@ export const fetchArticles = createAsyncThunk<IArticle[], void>(
 export const fetchArticleDetails = createAsyncThunk(
   "articles/fetchArticleDetails",
   async (articleId: string) => {
-    return null;
+    const response = await ApiServices.get(`/assignment/articles/${articleId}`);
+    return response as IArticle;
   }
 );

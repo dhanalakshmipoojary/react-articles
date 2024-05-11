@@ -2,6 +2,7 @@ export interface IArticle {
   id: string;
   title: string;
   summary: string;
+  fullText?: string;
 }
 
 export interface IArticleState {
