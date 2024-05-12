@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticleDetails } from "../../store/action";
 import { RootState, AppDispatch } from "../../store/store";
-import { Card, Header, Text, Loader } from "../../components";
-import { IArticle } from '../../_types/actionType'
+import { Header, Text, RelatedArticles } from "../../components";
 import style from "./ArticlesDetails.module.scss";
 import ArticleSuspense from "../../components/ArticleSuspense/ArticleSuspense";
 
@@ -15,7 +14,7 @@ function ArticlesDetails() {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const { articles, selectedArticle: articleDetails, loadingDetails: requestInProgress } = useSelector((state: RootState) => state.articles);
+  const { selectedArticle: articleDetails, loadingDetails: requestInProgress } = useSelector((state: RootState) => state.articles);
 
   useEffect(() => {
     if (articleId) {
@@ -23,16 +22,10 @@ function ArticlesDetails() {
     }
   }, []);
 
-  const handleReadMore = (id: string) => {
-    navigate(`/detail/${id}`);
-  };
 
   const handleBackButton = () => navigate(`/`);
 
-  function getRelatedArticles(articles: IArticle[], selectedArticleId: string) {
-    const relatedArticles = articles.slice(0, 3)
-    return relatedArticles.filter((article: IArticle) => article.id !== selectedArticleId);
-  }
+
 
   const renderDetails = useCallback(() => (
     articleDetails ? (
@@ -48,37 +41,14 @@ function ArticlesDetails() {
     ) : null
   ), [articleDetails])
 
-  const renderRelatedArticles = useCallback(() => {
-    const relatedArticles = getRelatedArticles(articles, articleId);
-    return (
-      <div className={style.articlesWrapper}>
-        {relatedArticles.length > 0 ? (
-          <>
-            <div className={style.relatedItems}>
-              <h3>you may also like</h3>
-            </div>
 
-            <div className={style.articles}>
-              {relatedArticles.map((card) => (
-                <Card
-                  key={card.id}
-                  title={card.title}
-                  summary={card.summary}
-                  onClick={() => handleReadMore(card.id)}
-                />
-              ))}
-            </div></>
-        ) : null}
-      </div>
-    );
-  }, [articles, articleId]);
 
   return (
     <div>
       <Header title={<Text id="NEWS_DETAILS" />} enableBackButton={true} onBack={handleBackButton} />
       <ArticleSuspense loading={requestInProgress}>
         {renderDetails()}
-        {renderRelatedArticles()}
+        <RelatedArticles selectedArticleId={articleId} />
       </ArticleSuspense>
     </div>
   );

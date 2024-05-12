@@ -36,31 +36,3 @@
     }
   }
 }
-
-.articlesWrapper {
-  max-width: 1200px;
-  margin-inline: auto;
-  padding: 24px;
-
-  .relatedItems {
-    display: flex;
-    justify-content: center;
-    h3 {
-      font-style: normal;
-      font-weight: 200;
-      font-size: 25.87px;
-      line-height: 36px;
-      letter-spacing: 1.8px;
-      color: #003f52;
-      text-transform: uppercase;
-      margin: 20px;
-    }
-  }
-
-  .articles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    grid-auto-rows: minmax(auto, 1fr);
-  }
-}

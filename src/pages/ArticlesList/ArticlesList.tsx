@@ -19,9 +19,9 @@ function ArticlesList() {
     dispatch(fetchArticles());
   }, []);
 
-  const handleReadMore = (id: string) => {
+  const handleReadMore = useCallback((id: string) => {
     navigate(`/detail/${id}`);
-  };
+  }, []);
 
   const renderArticles = useCallback(() => (
     articles.length > 0 ? (

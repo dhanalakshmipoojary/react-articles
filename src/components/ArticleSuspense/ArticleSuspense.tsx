@@ -4,12 +4,12 @@ import { RootState } from "../../store/store";
 import { Text, Loader } from "../../components";
 import style from "./ArticleSuspense.module.scss";
 
-export interface ArticleSuspense {
+export interface ArticleSuspenseProps {
   loading: boolean,
   children: React.ReactNode | null
 };
 
-function ArticleSuspense(props: ArticleSuspense) {
+function ArticleSuspense(props: ArticleSuspenseProps) {
   const error = useSelector((state: RootState) => state.articles.error);
 
   const renderLoader = useCallback(() => props.loading ? <Loader /> : null, [props.loading]);
