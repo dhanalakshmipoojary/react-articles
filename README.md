@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+# PatientSky News Documentation
+### Overview:
+PatientSky News is a web application designed to provide users with access to articles related to PatientSky. The application is built using React with TypeScript for frontend development, Redux Toolkit for state management, and SCSS for styling.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Steps to run project
+```
+> npm i
+> npm start
+```
+### Steps to Create build
+```
+> npm build
+```
+### Live demo:
+Application is currently hosted here: [https://patiantsky-news.netlify.app/](https://patiantsky-news.netlify.app/)
 
-## Available Scripts
+### Approach:
+#### Planning:
+1. Conducted initial planning to define project requirements, features, and user interface design.
+2. Identified key functionalities such as listing articles, viewing article details, and managing application state.
+#### Development:
+1. Frontend: Utilized React as the frontend framework due to its component-based architecture and virtual DOM rendering.
+2. State Management: Implemented Redux Toolkit for state management to ensure a centralized and predictable state container.
+3. Type Safety: Leveraged TypeScript to add static typing to the project, enhancing code readability and maintainability.
+4. Styling: Utilized SCSS for styling to maintain consistency and modularity in design elements.
+#### Error Handling:
+1. Implemented error handling mechanisms to gracefully handle cases such as failed data fetching or rendering issues.
+2. Displayed informative error messages or fallback UI components to provide feedback to users in case of errors.
+#### Lazy Loading:
+1. Implemented lazy loading techniques using React Suspense and lazy loading for optimizing the loading of components.
+#### Caching API Calls:
+1. Implemented caching mechanisms to prevent unnecessary API calls at listing page.
+#### Performance Optimization with useMemo and useCallback:
+1. Utilized useMemo hook to memoize expensive calculations.
+2. Used useCallback hook to memoize callback functions, ensuring that they remain stable across re-renders and preventing unnecessary re-renders of child components.
+#### React Router for Navigation:
+1. Utilized React Router for handling client-side navigation and routing within the application.
+#### Deployment:
+1. Deployed the application using `netlify` for accessibility to users.
+2. Implemented continuous integration, which triggers when code is pushed to the master branch.
+#### GIT approach:
+1. Generated appropriate issue tickets and established branches for each issue.
+2. Generated pull requests for each issue and linked them with corresponding issue IDs.
 
-In the project directory, you can run:
+### Challenges Faced:
+1. Integration with Redux Toolkit: Adapting to the Redux Toolkit's approach to state management posed initial challenges, especially regarding the setup and configuration of slice reducers.
+2. TypeScript required additional effort in defining types and resolving type-related errors.
 
-### `npm start`
+### Lessons Learned:
+1. Efficient State Management: Explore reduct-toolkit for the first time and integrated same in the project.
+2. TypeScript helped catch potential bugs early in the development process and improved code quality through type annotations.
+3. Optimization Techniques: Utilizing useMemo and useCallback hooks improved performance by optimizing render cycles and preventing unnecessary re-renders.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Modules:
+#### 1. Article List page:
+Article list page will consists of 3 columns and will be responsive for smaller screens.
+![image](https://github.com/dhanalakshmipoojary/react-articles/assets/63151085/48c4f246-c176-4f6a-96f5-4b18a0c1afd5)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### 2. Aricle Details page:
+Article details page will display title, subtitle and description about article. Also consists back button for back navigations. 
+This page also contains `YOU MAY ALSO LIKE` articles. Currently 3 articles displayed here.
+![image](https://github.com/dhanalakshmipoojary/react-articles/assets/63151085/71a2d87f-7b37-4e10-ab86-02e16913f323)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
