@@ -1,62 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ApiServices from "../../_services/ApiService";
-
-import { Card, Header } from "../../components";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArticles } from "../../store/action";
+import { RootState, AppDispatch } from "../../store/store";
+import { Card, Header, Text } from "../../components";
+import ArticleSuspense from "../../components/ArticleSuspense/ArticleSuspense";
 import style from "./ArticlesList.module.scss";
 
-interface IArticleList {
-  id: string;
-  title: string;
-  summary: string;
-}
-
 function ArticlesList() {
-  const [articlesList, setArticlesList] = useState<IArticleList[]>([
-    {
-      id: "",
-      title: "",
-      summary: "",
-    },
-  ]);
-  const [notifications, setNotifications] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const articles = useSelector((state: RootState) => state.articles.articles);
+  const loadingList = useSelector(
+    (state: RootState) => state.articles.loadingList
+  );
 
   useEffect(() => {
-    ApiServices.get("/assignment/articles")
-      .then((data) => {
-        console.log("articlesList", data);
-        setArticlesList(data);
-      })
-      .catch((error) => setNotifications(error.message));
-  }, []); ///assignment/articles/{id}
+    dispatch(fetchArticles());
+  }, []);
 
   const handleReadMore = (id: string) => {
     navigate(`/detail/${id}`);
   };
 
-  const renderError = notifications ? (
-    <div className={notifications}>{notifications}</div>
-  ) : null;
-
-  const renderArticles =
-    articlesList.length > 0
-      ? articlesList.map((card) => (
+  const renderArticles = useCallback(() => (
+    articles.length > 0 ? (
+      <div className={style.articles}>
+        {articles.map((card) => (
           <Card
+            key={card.id}
             title={card.title}
             summary={card.summary}
             onClick={() => handleReadMore(card.id)}
           />
-        ))
-      : null;
+        ))}
+      </div>
+    ) : null
+  ), [articles])
+
 
   return (
     <div>
-      <Header title="News" />
-      <div className={style.articles}>
-        {notifications ? renderError : renderArticles}
-      </div>
+      <Header title={<Text id="SITE_NAME" />} />
+      <ArticleSuspense loading={loadingList}>
+        {renderArticles()}
+      </ArticleSuspense>
     </div>
   );
 }

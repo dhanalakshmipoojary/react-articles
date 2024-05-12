@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ApiServices from "../../_services/ApiService";
-import { Card, Header } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArticleDetails } from "../../store/action";
+import { RootState, AppDispatch } from "../../store/store";
+import { Card, Header, Text, Loader } from "../../components";
 import style from "./ArticlesDetails.module.scss";
+import ArticleSuspense from "../../components/ArticleSuspense/ArticleSuspense";
 
 interface IArticleList {
   id: string;
@@ -12,43 +15,39 @@ interface IArticleList {
 }
 
 function ArticlesDetails() {
-  const [articlesList, setArticlesList] = useState<IArticleList>({
-    id: "",
-    title: "",
-    summary: "",
-    fullText: "",
-  });
-  const [notifications, setNotifications] = useState(null);
   const navigate = useNavigate();
-  const { articleId } = useParams();
+  const { articleId = "" } = useParams();
+
+  const dispatch = useDispatch<AppDispatch>();
+  const articleDetails = useSelector(
+    (state: RootState) => state.articles.selectedArticle
+  );
+  const requestInProgress = useSelector(
+    (state: RootState) => state.articles.loadingDetails
+  );
 
   useEffect(() => {
-    ApiServices.get(`/assignment/articles/${articleId}`)
-      .then((data) => {
-        console.log("articlesList", data);
-        setArticlesList(data);
-      })
-      .catch((error) => setNotifications(error.message));
+    if (articleId) {
+      dispatch(fetchArticleDetails(articleId));
+    }
   }, []);
 
-  const renderError = notifications ? (
-    <div className={notifications}>{notifications}</div>
-  ) : null;
-
-  const renderArticles = articlesList ? (
-    <div>
-      <h1>{articlesList.title}</h1>
-      <p>{articlesList.summary}</p>
-      <p>{articlesList.fullText}</p>
-    </div>
-  ) : null;
+  const renderDetails = useCallback(() => (
+    articleDetails ? (
+      <div>
+        <h1>{articleDetails.title}</h1>
+        <p>{articleDetails.summary}</p>
+        <p>{articleDetails.fullText}</p>
+      </div>
+    ) : null
+  ), [articleDetails])
 
   return (
     <div>
-      <Header title="News Details" />
-      <div className={style.articlesDetails}>
-        {notifications ? renderError : renderArticles}
-      </div>
+      <Header title={<Text id="NEWS_DETAILS" />} />
+      <ArticleSuspense loading={requestInProgress}>
+        {renderDetails()}
+      </ArticleSuspense>
     </div>
   );
 }
