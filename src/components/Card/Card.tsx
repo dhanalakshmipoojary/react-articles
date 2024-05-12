@@ -4,18 +4,17 @@ import ReadMoreButton from "../ReadMoreButton/ReadMoreButton";
 
 export interface CardProps {
   title?: string | React.ReactNode;
-  onClick?:any;
+  onClick?: any;
   summary: string;
 }
 
 function Card({ title, summary, onClick }: CardProps) {
   return (
-    <div className={style.cardWrapper}>
-        <div className={style.cardBody}>
-          <h2>{title}</h2>
-          <p>{summary}</p>
-          <ReadMoreButton onClick={onClick} />
-        </div>
+    <div className={style.card}>
+      <h2 className={style.cardTitle}>{title}</h2>
+      <div className={style.borderBotton}></div>
+      <p className={style.cardDescription}>{summary}</p>
+      <ReadMoreButton onClick={onClick} />
     </div>
   );
 }
