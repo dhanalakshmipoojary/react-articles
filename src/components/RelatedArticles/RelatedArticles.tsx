@@ -19,7 +19,7 @@ function RelatedArticles({ selectedArticleId }: RelatedArticlesProps) {
   };
 
   const relatedArticles = useMemo(() => {
-    return articles.slice(0, 4).filter((article: IArticle) => article.id !== selectedArticleId);
+    return articles.filter((article: IArticle) => article.id !== selectedArticleId).slice(0, 3);
   }, [articles, selectedArticleId]);
 
   return (
