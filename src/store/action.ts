@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import ApiServices from "../_services/ApiService";
 import { IArticle } from "../_types/actionType";
-import { error } from "console";
 
 export const fetchArticles = createAsyncThunk<IArticle[], void>(
   "articles/fetchArticles",
