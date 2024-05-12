@@ -3,3 +3,4 @@ export { default as Header } from "./Header/Header";
 export { default as ReadMoreButton } from "./ReadMoreButton/ReadMoreButton";
 export { default as Text } from "./Text/Text";
 export { default as Loader } from "./Loader/Loader";
+export { default as RelatedArticles } from "./RelatedArticles/RelatedArticles";
