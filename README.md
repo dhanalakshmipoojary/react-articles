@@ -41,7 +41,7 @@ Application is currently hosted here: [https://patiantsky-news.netlify.app/](htt
 #### GIT approach:
 1. Generated appropriate issue tickets and established branches for each issue.
 2. Generated pull requests for each issue and linked them with corresponding issue IDs.
-3. Issues track - (Tickets)[https://github.com/dhanalakshmipoojary/react-articles/issues?q=is%3Aissue+is%3Aclosed]
+3. Issues track - [Tickets](https://github.com/dhanalakshmipoojary/react-articles/issues?q=is%3Aissue+is%3Aclosed)
 
 ### Challenges Faced:
 1. Integration with Redux Toolkit: Adapting to the Redux Toolkit's approach to state management posed initial challenges, especially regarding the setup and configuration of slice reducers.
