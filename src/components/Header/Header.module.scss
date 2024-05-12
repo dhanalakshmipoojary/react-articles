@@ -1,88 +1,33 @@
-// // .header {
-// //   font-weight: 600;
-// //   font-size: 1.25rem;
-// //   line-height: 1.875rem;
-// //   letter-spacing: 0.009rem;
-// //   color: #215ec9;
-// // }
-
-
-// .header {
-//   background-color: #f4f4f4;
-//   padding: 20px;
-//   text-align: center;
-// }
-
-// .headerTitle {
-//   color: #333;
-//   font-size: 28px;
-//   margin-bottom: 10px;
-// }
-
-// .headerDescription {
-//   color: #666;
-//   font-size: 16px;
-// }
-
 .header {
   background-color: #fff;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 1000; /* Ensure the header appears above other content */
+  z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .logo {
+    color: #333;
+    font-size: 24px;
+  }
+
+  .backButton {
+    background-color: #003f52;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 2;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+  }
 }
-
-.logo {
-  color: #333;
-  font-size: 24px;
-}
-
-.searchBox {
-  display: flex;
-}
-
-// .searchInput {
-//   padding: 8px;
-//   border: none;
-//   border-radius: 4px 0 0 4px;
-// }
-
-// .searchBtn {
-//   background-color: #fff;
-//   color: #333;
-//   border: none;
-//   padding: 8px 16px;
-//   border-radius: 0 4px 4px 0;
-//   cursor: pointer;
-// }
-
-.searchInput {
-  padding: 8px;
-  border: none;
-  border-radius: 4px 0 0 4px;
-  background-color: #f2f2f2; /* Set a light gray background color */
-  color: #333; /* Set text color */
-}
-
-.searchInput:focus {
-  outline: none; /* Remove the default focus outline */
-  background-color: #fff; /* Change background color on focus */
-}
-
-.searchBtn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-
-.searchBtn:hover {
-  background-color: #555;
-}
-

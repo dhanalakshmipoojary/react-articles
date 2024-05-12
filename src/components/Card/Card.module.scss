@@ -1,28 +1,28 @@
-.cardWrapper {
-  position: relative;
-  border-radius: 16px;
-  box-shadow: none;
-  background: #fff;
-  transform-origin: center;
-  transition: all 0.4s ease-in-out;
-  overflow: hidden;
-  --img-scale: 1.1;
-  --title-color: #28666e;
-  --link-icon-translate: 0;
-  --link-icon-opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
+.card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
 
+  .cardTitle {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 10px;
+    color: #003f52;
+  }
 
-.cardWrapper h2 {
-  margin: 0 0 18px 0;
-  font-family: "Bebas Neue", cursive;
-  font-size: 1.9rem;
-  letter-spacing: 0.06em;
-  color: var(--title-color);
-  transition: color 0.3s ease-out;
-}
+  .cardDescription {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
 
-.cardBody {
-  padding: 24px;
+  .borderBotton {
+    border-bottom: 2px solid #92851d;
+    width: 100px;
+    content: "";
+  }
 }

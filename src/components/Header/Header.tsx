@@ -3,19 +3,17 @@ import style from "./Header.module.scss";
 
 export interface HeaderProps {
   title?: string | React.ReactNode;
+  enableBackButton?: boolean;
+  onBack?: () => void;
 }
 
-function Header({ title }: HeaderProps) {
-  // return <label className={style.header}>{title}</label>;
+function Header({ title, enableBackButton = false, onBack }: HeaderProps) {
   return (
     <header className={style.header}>
-      {/* <h1 className={style.headerTitle}>Latest News</h1>
-    <p className={style.headerDescription}>Stay updated with the latest news articles</p> */}
+      <>
+        {enableBackButton && <a href="#" className={style.backButton} onClick={onBack}>&#8249;</a>}
+      </>
       <div className={style.logo}>{title}</div>
-      <div className={style.searchBox}>
-        <input type="text" placeholder="Search articles..." className={style.searchInput} />
-        <button className={style.searchBtn}>Search</button>
-      </div>
     </header>
   )
 }
