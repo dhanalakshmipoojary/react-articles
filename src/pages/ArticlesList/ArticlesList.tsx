@@ -17,10 +17,12 @@ function ArticlesList() {
 
   useEffect(() => {
     dispatch(fetchArticles());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleReadMore = useCallback((id: string) => {
     navigate(`/detail/${id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderArticles = useCallback(() => (
