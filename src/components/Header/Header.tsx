@@ -1,17 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import style from "./Header.module.scss";
 
 export interface HeaderProps {
   title?: string | React.ReactNode;
   enableBackButton?: boolean;
-  onBack?: () => void;
 }
 
-function Header({ title, enableBackButton = false, onBack }: HeaderProps) {
+function Header({ title, enableBackButton = false }: HeaderProps) {
   return (
     <header className={style.header}>
       <>
-        {enableBackButton && <a href="#" className={style.backButton} onClick={onBack}>&#8249;</a>}
+        {enableBackButton && <Link className={style.backButton} to='/'>&#8249;</Link>}
       </>
       <div className={style.logo}>{title}</div>
     </header>

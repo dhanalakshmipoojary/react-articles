@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticleDetails } from "../../store/action";
 import { RootState, AppDispatch } from "../../store/store";
 import { Header, Text, RelatedArticles } from "../../components";
-import style from "./ArticlesDetails.module.scss";
 import ArticleSuspense from "../../components/ArticleSuspense/ArticleSuspense";
+import style from "./ArticlesDetails.module.scss";
 
 
 function ArticlesDetails() {
-  const navigate = useNavigate();
   const { articleId = "" } = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -20,12 +19,8 @@ function ArticlesDetails() {
     if (articleId) {
       dispatch(fetchArticleDetails(articleId));
     }
-  }, []);
-
-
-  const handleBackButton = () => navigate(`/`);
-
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [articleId]);
 
   const renderDetails = useCallback(() => (
     articleDetails ? (
@@ -45,7 +40,7 @@ function ArticlesDetails() {
 
   return (
     <div>
-      <Header title={<Text id="NEWS_DETAILS" />} enableBackButton={true} onBack={handleBackButton} />
+      <Header title={<Text id="NEWS_DETAILS" />} enableBackButton={true} />
       <ArticleSuspense loading={requestInProgress}>
         {renderDetails()}
         <RelatedArticles selectedArticleId={articleId} />
