@@ -8,6 +8,7 @@ export interface IArticle {
 export interface IArticleState {
   articles: IArticle[];
   selectedArticle: IArticle | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  loadingList: boolean;
+  loadingDetails: boolean;
   error: string | null;
 }

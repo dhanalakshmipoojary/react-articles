@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticles } from "../../store/action";
 import { RootState, AppDispatch } from "../../store/store";
-import { Card, Header, Text, Loader } from "../../components";
+import { Card, Header, Text } from "../../components";
+import ArticleSuspense from "../../components/ArticleSuspense/ArticleSuspense";
 import style from "./ArticlesList.module.scss";
 
 function ArticlesList() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const articles = useSelector((state: RootState) => state.articles.articles);
-  const error = useSelector((state: RootState) => state.articles.error);
+  const loadingList = useSelector(
+    (state: RootState) => state.articles.loadingList
+  );
 
   useEffect(() => {
     dispatch(fetchArticles());
@@ -20,32 +23,28 @@ function ArticlesList() {
     navigate(`/detail/${id}`);
   };
 
-  const renderError = error ? (
-    <div className={style.error}>
-      <Loader />
-      <Text id="DATA_FETCH_ERROR" />
-    </div>
-  ) : null;
+  const renderArticles = useCallback(() => (
+    articles.length > 0 ? (
+      <div className={style.articles}>
+        {articles.map((card) => (
+          <Card
+            key={card.id}
+            title={card.title}
+            summary={card.summary}
+            onClick={() => handleReadMore(card.id)}
+          />
+        ))}
+      </div>
+    ) : null
+  ), [articles])
 
-  const renderArticles = (
-    <div className={style.articles}>
-      {articles.length > 0
-        ? articles.map((card) => (
-            <Card
-              key={card.id}
-              title={card.title}
-              summary={card.summary}
-              onClick={() => handleReadMore(card.id)}
-            />
-          ))
-        : null}
-    </div>
-  );
 
   return (
     <div>
-      <Header title="News" />
-      {error ? renderError : renderArticles}
+      <Header title={<Text id="SITE_NAME" />} />
+      <ArticleSuspense loading={loadingList}>
+        {renderArticles()}
+      </ArticleSuspense>
     </div>
   );
 }

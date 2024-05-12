@@ -5,7 +5,8 @@ import { IArticleState } from "../_types/actionType";
 const initialState: IArticleState = {
   articles: [],
   selectedArticle: null,
-  status: "idle",
+  loadingList: false,
+  loadingDetails: false,
   error: null,
 };
 
@@ -16,27 +17,27 @@ const articleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticles.pending, (state) => {
-        state.status = "loading";
+        state.loadingList = true;
         state.error = null;
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.loadingList = false;
         state.articles = action.payload;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
-        state.status = "failed";
+        state.loadingList = false;
         state.error = action.error.message || "Failed to fetch articles";
       })
       .addCase(fetchArticleDetails.pending, (state) => {
-        state.status = "loading";
+        state.loadingDetails = true;
         state.error = null;
       })
       .addCase(fetchArticleDetails.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.loadingDetails = false;
         state.selectedArticle = action.payload;
       })
       .addCase(fetchArticleDetails.rejected, (state, action) => {
-        state.status = "failed";
+        state.loadingDetails = false;
         state.error = action.error.message || "Failed to fetch article details";
       });
   },
