@@ -38,6 +38,7 @@ function ArticlesList() {
         ))}
       </div>
     ) : null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   ), [articles])
 
 
