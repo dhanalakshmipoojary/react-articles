@@ -17,8 +17,7 @@ const ApiServices = {
     return fetch(API_URL + url, requestOptions).then(this.handleResponse);
   },
   handleResponse: function (response: Response): Promise<any> {
-    return response.text().then((text: string) => {
-      const data = text && JSON.parse(text);
+    return response.json().then((data: any) => {
       if (!response.ok) {
         const error = (data && data.message) || response.statusText;
         return Promise.reject(error);
