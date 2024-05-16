@@ -22,6 +22,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
         state.loadingList = false;
+        state.error = null;
         state.articles = action.payload;
       })
       .addCase(fetchArticles.rejected, (state, action) => {
@@ -34,6 +35,7 @@ const articleSlice = createSlice({
       })
       .addCase(fetchArticleDetails.fulfilled, (state, action) => {
         state.loadingDetails = false;
+        state.error = null;
         state.selectedArticle = action.payload;
       })
       .addCase(fetchArticleDetails.rejected, (state, action) => {
